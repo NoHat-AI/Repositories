@@ -1,0 +1,7 @@
+This is a write up document for integration of GitHub repositories with local Linux machine. 
+
+Task:
+
+Summary:
+
+Process:
