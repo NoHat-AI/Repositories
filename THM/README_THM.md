@@ -1,1 +1,1 @@
-This repository is for all work and write ups done regarding Try Hack Me .com
+This repository is for all work and write ups pretaining to Try Hack Me .com
