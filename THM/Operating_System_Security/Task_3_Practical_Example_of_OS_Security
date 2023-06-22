@@ -1,0 +1,36 @@
+This is a write up to Task 3 in the Operating System Security room on TryHackMe.com
+https://tryhackme.com/room/operatingsystemsecurity
+
+One typical attack is to get access to a remotre system. We can accomplish this by getting target machine to run malicious file or by obtaining a username and password.
+Generally, after getting some access to a remote system, attackers wiil try to escalate they privillage level to a system administrator. 
+'root' account is typically the system administrator on Android, Apple, and Linux OS. 'administrator' on MS Windows systems.
+
+Target IP: 
+10.10.191.46
+
+Additional Info: 2 sticky notes on PC screen, sammie and dragon.
+
+Task: Get remote access to traget IP.
+
+Step 1: Start AttackBox and open terminal.
+
+Step 2: Connect to the target IP remote machine via SSH. User name is sammie.
+Type in 'yes' and press enter to authenticate the SSH-fingerprint. 
+Input password 'dragon' when promoted.
+ 
+$ SSH sammie@10.10.191.46
+
+Step 3: Change directory 'cd' to the home direcotry ($ cd ..) and list information of the direcotry ($ ls).
+We see 'sammie', and 3 other names which apear to me usernames. johnny, linda, sammie, strategos.
+
+Step 4: Switch users to johnny ($ su - johnny).
+Try guessing the password using 7 most common passwords. 
+Figure out password is abc123.
+
+Step 5: Using 'history' command in command line, find that johnny switched to root, and potentially leaked password of 'happyHack!iNG"
+
+Step 6: 'su' to root and enter password when prompted. After executing 'ls' command in the ~ direcotry, we see 'flag.txt".
+
+Flag is THM{YouGotRoot}
+
+

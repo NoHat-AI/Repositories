@@ -1,0 +1,48 @@
+This is a summary of Task 2 in the Operating System Security room on TryHackMe.com.
+
+As we mentioned in the previous task, security is concerned with attacks against:
+    Confidentiality
+    Integrity
+    Availability
+
+Three possible weaknesses targeted by malicious users are:
+    Authentication and Weak Passwords
+    Weak File Permissions
+    Malicious Programs
+
+
+Authentication and Weak Passwords:
+Authentication is the act of verifying your identity, be it a local or a remote system. Authentication can be achieved via three main ways:
+    Something you know, such as a password or a PIN code.
+    Something you are, such as a fingerprint.
+    Something you have, such as a phone number via which you can receive an SMS message.
+
+Since passwords are the most common form of authentication, they are also the most attacked. Many users tend to use easy-to-guess passwords or the same password on many websites. 
+Moreover, some users rely on personal details such as date of birth and name of their pet, thinking that this is easy to remember and unknown to attackers. However, attackers are aware of this tendency among users.
+
+The National Cyber Security Centre (NCSC) has published a list of the 100,000 most common passwords (https://www.ncsc.gov.uk/blog-post/passwords-passwords-everywhere). 
+
+Weak FIle Premissions:
+Weak file permissions make it easy for the adversary to attack confidentiality and integrity. They can attack confidentiality as weak permissions allow them to access files they should not be able to access. 
+Moreover, they can attack integrity as they might modify files that they should not be able to edit.
+
+
+Access to Malicious Programs
+Depending on the type of malicious program, it can attack confidentiality, integrity, and availability.
+
+Trojan horse programs give attacker access to traget system. Allowing attackers to read and even modify your files.
+Ransomware attacks availibility. Ransomware is a malicious program that encrypts the user's files. Encryption makes the file(s) unreadable without knowing the encryption password; in other words, 
+the files become gibberish without decryption (reversing the encryption). The attacker offers the user the ability to restore availability, 
+i.e., regain access to their original files: they would give them the encryption password if the user is willing to pay the “ransom.”
+
+Task 2 Question:
+
+Which of the following is a strong password, in your opinion?
+
+    iloveyou
+    1q2w3e4r5t
+    LearnM00r
+    qwertyuiop
+
+
+ANSWER: LearnM00r
