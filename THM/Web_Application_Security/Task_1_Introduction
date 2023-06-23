@@ -1,0 +1,17 @@
+This is a summary of Task 1 for the Web Application SEcurity room on TryHackMe.com
+
+A web application is like an app you can access via your browser without needing to install anything.
+
+
+The following are some examples of web applications:
+
+    Webmail such as Tutanota, Protonmail, Outlook, and Gmail
+    Online office suites such as Microsoft Office 365 (Word, Excel, and PowerPoint), Google Drive (Docs, Sheets, and Slides), and Zoho Office (Writer, Sheet, and Show)
+    Online shopping such as Amazon.com, AliExpress, and Etsy
+
+Thousands more examples provide a myriad of services. Other examples include online banking, money transfer, weather forecast, and social media.
+
+Question: 
+What do you need to access a wen application"
+
+ANSWER: browser
