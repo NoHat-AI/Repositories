@@ -1,0 +1,23 @@
+This is a write up for Task 3 of the Web Application Security room on TryHackMe.com
+
+Target: https://inventory-management.thm/
+
+Task: Use Insecure Direct Object References (IDOR) to access information that you should not have access to.
+Find the flag.
+To find flag, revert the changes of an attacker that was able to get unauthorized access via an employee account.
+
+Step 1: Click the 'View Site' button to launch target website inside THM web page.
+
+Step 2: Enumurate the website. Find anything that may be useful in finding changes and reverting them.
+upon inpsction, we found an 'Activity' tab. This will bring us to a new web page with a URL ending in id=10. 
+This is a vulnerability we can use.
+
+Step 3: By changing the number at the end of the URL we can view several different employee profiles and 
+their recent activity. Upon investigating URL ending in id=9, Alya's profile, we see that we are able to 
+revert the most recent changes made from her profile. 
+
+Step 4: Press the 'Revert' button next each line item to revert all changes. Once done flag will pop on-screen.
+
+
+FLAG:
+THM{IDOR_EXPLORED} 
