@@ -15,140 +15,48 @@ We can see there are three open ports.
 We just discovered three services running:
 
     FTP server: FTP stands for File Transfer Protocol and is used to transfer files between machines.
-    SSH server: SSH stands for Secure Shell and is used for secure remote login. In other words, it allows you to execute commands on a remote system securely.
-    HTTP server: HTTP stands for Hypertext Transfer Protocol and is used for the web. Whenever you are browsing the web, you are using HTTP or HTTPS. HTTPS is the secure (encrypted) version of HTTP.
-You can also notice that Nmap reports on whether the host is up based on whether it receives any response from it. 
-This is useful to know when no ports are open or accessible.
+    SSH server: SSH stands for Secure Shell and is used for secure remote login. 
+In other words, it allows you to execute commands on a remote system securely.
+    HTTP server: HTTP stands for Hypertext Transfer Protocol and is used for the web.
+Whenever you are browsing the web, you are using HTTP or HTTPS. HTTPS is the secure (encrypted) version of HTTP.
 
-Let’s try to gather more information about the FTP server.
 Step 2: Connect to target FTP server. ($ ftp 10.10.149.45)
+Try using the login anonymous to see if this FTP server supports anonymous logins. (Type Anonymous when prompted for Name.
+Anonymous login worked.
+   
+Step 3: Enumurate the FTP server. 
+Use List command ($ ls) to get a list of the filenames along with their details.
+If you are curious about any file, you can download it using get filename. I wonder what the file secret.txt contains, so let’s download it using get secret.txt.
+Once you download the files, type exit or bye to quit the FTP client.
 
-    We will connect to the target FTP server by typing on the AttackBox’s terminal ftp 10.10.149.45.
-    Next, we will try to log in using the login anonymous to see if this FTP server supports anonymous logins. To our luck, it worked.
-    We try to see the files available using the command ls, short for list. We get a list of the filenames along with their details.
-    If you are curious about any file, you can download it using get filename. I wonder what the file secret.txt contains, so let’s download it using get secret.txt.
-    Once you download the files, type exit or bye to quit the FTP client.
+Step 4: Download and veiw secrets.txt file from target's FTP server. ($ get secret.txt)
+Exit the FTP server and cat the secret.txt file. 
 
-The above interaction with the FTP server is shown in the terminal output below.
-AttackBox Terminal
+We are able to find a password ABC789xyz123.
+This is the answer to the first questions at the bottom of Task 3.
 
-           
-root@AttackBox# ftp 10.10.149.45
-Connected to 10.10.149.45 (MACHINE_IP).
-220 (vsFTPd 3.0.3)
-Name (MACHINE_IP:root): anonymous
-230 Login successful.
-Remote system type is UNIX.
-Using binary mode to transfer files.
-ftp> ls
-227 Entering Passive Mode (10,20,30,130,181,190).
-150 Here comes the directory listing.
--rw-r--r--    1 ftp      ftp        425351 Apr 06 11:22 2680-0.txt
--rw-r--r--    1 ftp      ftp           356 Apr 06 11:22 2680.epub
--rw-r--r--    1 ftp      ftp        251857 Apr 06 11:22 55317-0.txt
--rw-r--r--    1 ftp      ftp           358 Apr 06 11:22 55317.epub
--rwxr-xr-x    1 ftp      ftp           214 Apr 06 11:22 backup.sh
--rw-r--r--    1 ftp      ftp            23 Apr 06 11:22 secret.txt
-226 Directory send OK.
-ftp> get secret.txt 
-local: secret.txt remote: secret.txt
-227 Entering Passive Mode (10,20,30,130,159,46).
-150 Opening BINARY mode data connection for secret.txt (23 bytes).
-226 Transfer complete.
-23 bytes received in 0.00107 secs (21.48 Kbytes/sec)
-ftp> exit
-221 Goodbye.
+Step 5: Connect to target IP using SSH.
+Use command ssh root@10.10.149.45 to try and log in as root account via SSH. 
+Input password we found when prompted.
+We have gained remote access to a root account via SSH.
 
+Step 6: Use command ls to list all file and directories in the current directoriy.
+We see flag.txt
+
+Step 7: View the flag by using command cat flag.txt. 
+THM{FTP_SERVER_OWNED}
+This is the answer to the second question at the bottom of Task 3.
         
+Step 8: Access other user's files. 
+When we use ls /home command we can see there is an account nameed librarian. 
+Use command cd /home/librarian to move to their directory.
+After using ls command we see another flag.txt file
+View this file with cat flag.txt command. THM{LIBRARIAN_ACCOUNT_COMPROMISED}.
+This is the answer to the third question at the bottom of Task 3. 
 
-Looking at the files, we notice six files: three txt files, two epub files, and one sh file. The first two extensions are for text files and ebooks, while the sh extension indicates that the file is a shell script. A shell script usually contains a group of commands that needs to be performed repetitively.
+DONE
 
-After we downloaded the file secret.txt with the FTP command get secret.txt and exited the FTP client using exit, we returned to the terminal. Let’s display the contents of the file secret.txt using cat secret.txt.
-AttackBox Terminal
-
-           
-root@AttackBox# cat secret.txt 
-password: [redacted]
-
-        
-
-We have kept the password hidden so you can try it for yourself. Repeat the above steps till you can display the contents of secret.txt and use it to answer the first question in this task.
-
-It must be the password of one of the accounts unintentionally copied to a public FTP server. Let’s try it to see if it works with the root account. The root account has full privileges on a Linux system, meaning that it can read and write any file and install and remove any program. At the terminal, we type ssh root@10.10.149.45. We will be asked for the password, so let’s try the password we discovered in the FTP server.
-AttackBox Terminal
-
-           
-root@AttackBox# ssh root@10.10.149.45
-root@10.10.149.45's password: 
-Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-107-generic x86_64)
-
- * Documentation:  https://help.ubuntu.com
- * Management:     https://landscape.canonical.com
- * Support:        https://ubuntu.com/advantage
-
-  System information as of Thu  7 Apr 08:16:42 UTC 2022
-
-  System load:  0.15              Processes:              225
-  Usage of /:   64.6% of 6.53GB   Users logged in:        0
-  Memory usage: 19%               IPv4 address for ens33: MACHINE_IP
-  Swap usage:   0%
-
- * Super-optimized for small spaces - read how we shrank the memory
-   footprint of MicroK8s to make it the smallest full K8s around.
-
-   https://ubuntu.com/blog/microk8s-memory-optimisation
-
-0 updates can be applied immediately.
-
-
-Last login: Thu Apr  7 07:53:28 2022 from 10.10.10.1
-
-        
-
-Congratulations! You now have complete control over the target server. Let’s collect a couple of flags. After logging in as root, we used the following Linux commands:
-
-    pwd, short for print working directory, to see where we are in the system. We are in the /root directory.
-    ls to list the files. We notice a flag.txt.
-    Use cat flag.txt to answer the second question in this task.
-
-AttackBox Terminal
-
-           
-root@AttackBox# pwd
-/root
-root@AttackBox# ls
-flag.txt  snap
-root@AttackBox# cat flag.txt 
-[redacted]
-
-        
-
-Because we are logged in as root, we have full access to all files, including other users’ files. Let’s try this out. We executed the following Linux commands:
-
-    cd /home to go to the directory containing all the users’ home directories. cd is short for change directory.
-    We run ls while in /home. We notice librarian is one of the users on the system. However, we have system administrator (root) privileges to check the contents of his home folder.
-    cd librarian to go to the user’s directory.
-    pwd to confirm that we are at /home/librarian.
-    ls shows that librarian has a single file flag.txt.
-    We can print the text file contents using cat flag.txt. Use this to answer the third question in this task.
-
-AttackBox Terminal
-
-           
-root@AttackBox# cd /home
-root@AttackBox# ls
-ftpsecure  librarian  strategos
-root@AttackBox# cd librarian/
-root@AttackBox# pwd
-/home/librarian
-root@AttackBox# ls
-flag.txt
-root@AttackBox# cat flag.txt 
-[redacted]
-
-        
-
-Let’s summarize what we have done in this task to get root access on the target system of IP address 10.10.149.45:
+To summarize what we have done in this task to get root access on the target system of IP address 10.10.149.45:
 
     We used nmap to learn about the running services.
     We connected to the FTP server to learn more about its configuration.
