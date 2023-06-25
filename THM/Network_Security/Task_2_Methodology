@@ -1,0 +1,34 @@
+This is a summary of the Task 2 in the Network Security room on TryHackMe.com
+
+
+
+Every “operation” requires some form of planning to achieve success. If you are interested in wildlife photography, you cannot just grab a camera and head to the jungle unless you don’t care about the outcome. For a safe and successful wildlife photography tour, you would need to learn more about the animals you want to shoot with your camera. This includes the habits of the animals and the dangers to avoid. The same would apply to a military operation against a target or breaking into a target network.
+
+
+Breaking into a target network usually includes a number of steps. According to Lockheed Martin, the Cyber Kill Chain has seven steps:
+
+    Recon: Recon, short for reconnaissance, refers to the step where the attacker tries to learn as 
+much as possible about the target. Information such as the types of servers, operating system, IP addresses, 
+names of users, and email addresses, can help the attack’s success.
+    Weaponization: This step refers to preparing a file with a malicious component, for example, 
+to provide the attacker with remote access.
+    Delivery: Delivery means delivering the “weaponized” file to the target via any feasible method, such as 
+email or USB flash memory.
+    Exploitation: When the user opens the malicious file, their system executes the malicious component.
+    Installation: The previous step should install the malware on the target system.
+    Command & Control (C2): The successful installation of the malware provides the attacker with a command and 
+control ability over the target system.
+    Actions on Objectives: After gaining control over one target system, the attacker has achieved their objectives. 
+One example objective is Data Exfiltration (stealing target’s data).
+
+Another analogy would be a thief interested in a target house. 
+The thief will spend some time learning about the target house, who lives there, when they leave, and when 
+they return home. 
+The thief will determine whether they have security cameras and alarm systems. 
+Once enough information has been gathered, the thief will plan the best entrance strategy. 
+Physical theft planning and execution resemble, in a way,
+the malicious attack that aims to break into a network and steal data.
+
+Question: 
+During which step of the Cyber Kill Chain does the attacker gather information about the target?
+ANSWER: Recon
