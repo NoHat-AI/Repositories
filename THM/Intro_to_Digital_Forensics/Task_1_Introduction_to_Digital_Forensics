@@ -1,0 +1,30 @@
+This is a summary of Task 1 of the Intro to Digital Forensics room on TryHackMe.com
+
+Forensics is the application of science to investigate crimes and establish facts. 
+With the use and spread of digital systems, such as computers and smartphones, a new branch of forensics was born to investigate related crimes: computer forensics, which later evolved into, digital forensics.
+
+Think about the following scenario. The law enforcement agents arrive at a crime scene; however, part of this crime scene includes digital devices and media. 
+Digital devices include desktop computers, laptops, digital cameras, music players, and smartphones, to name a few. Digital media includes CDs, DVDs, USB flash memory drives, and external storage. A few questions arise:
+
+    How should the police collect digital evidence, such as smartphones and laptops? What are the procedures to follow if the computer and smartphone are running?
+    How to transfer the digital evidence? Are there certain best practices to follow when moving computers, for instance?
+    How to analyze the collected digital evidence? Personal device storage ranges between tens of gigabytes to several terabytes; how can this be analyzed?
+
+
+Assuming this employee is suspected in the figure above, we can quickly see the digital devices that might be of interest to an investigation. 
+We notice a tablet, a smartphone, a digital camera, and a USB flash memory in addition to a desktop computer. 
+Any of these devices might contain a trove of information that can help with an investigation. Processing these as evidence would require digital forensics.
+
+More formally, digital forensics is the application of computer science to investigate digital evidence for a legal purpose. Digital forensics is used in two types of investigations:
+
+    Public-sector investigations refer to the investigations carried out by government and law enforcement agencies. They would be part of a crime or civil investigation.
+    Private-sector investigations refer to the investigations carried out by corporate bodies by assigning a private investigator, whether in-house or outsourced. They are triggered by corporate policy violations.
+
+Whether investigating a crime or a corporate policy violation, part of the evidence is related to digital devices and digital media. 
+This is where digital forensics comes into play and tries to establish what has happened. Without trained digital forensics investigators, it won’t be possible to process any digital evidence properly.
+
+
+Question: 
+Consider the desk in the photo above. In addition to the smartphone, camera, and SD cards, what would be interesting for digital forensics?
+
+ANSWER: Laptop

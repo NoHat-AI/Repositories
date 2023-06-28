@@ -1,0 +1,53 @@
+This is a write up for Task 3 in the Intro to Digital Forensics room on TryHackMe.com
+
+Task: Find out as much info as possible about the target. Use digital forensic tools to investigate a PDF file, and JPG image file from the kidnapper.
+
+Target: Kidnapper, kidnapped our cat Gado.
+The kidnapper sent a document with their requests in MS Word Document format. 
+We have converted the document to PDF format and extracted the image from the MS Word file for your convenience.
+
+Step 1: Download the necessary files.
+Press the blue "Download Task Files" button at the top right corner of Task 3.
+
+Step 2: Unzip the zipped folder. ($ sudo unzip ransomlettter.zip)
+
+Step 3: Investigate the ransom-letter.pdf file using pdfinfo command. ($ sudo pdfinfo ransom-letter.pdf)
+We can see the following info:
+itle:           Pay NOW
+Subject:         We Have Gato
+Author:          Ann Gree Shepherd
+Creator:         Microsoft® Word 2016
+Producer:        Microsoft® Word 2016
+CreationDate:    Wed Feb 23 04:10:36 2022 EST
+ModDate:         Wed Feb 23 04:10:36 2022 EST
+Custom Metadata: no
+Metadata Stream: yes
+Tagged:          yes
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           1
+Encrypted:       no
+Page size:       595.44 x 842.04 pts (A4)
+Page rot:        0
+File size:       71371 bytes
+Optimized:       no
+PDF version:     1.7
+
+The answer to hte first question at the bottom of the task is Ann Gree Shepherd.
+
+Step 4: Investigate the JPG image file using exiftool command. ($ sudo exiftool letter-image.jng)
+We  get a large list of data that was attached to the image such as file name, date/time of modified, file type, camara model namem, software on the camera, GPS coordinates, etc.
+We can find the answer to the second question at the bottom of Task 3.
+
+Step 5: Use the GPS coordinate from the image data to find location where the image was taken.
+Copy and paste the latitude and longitude into a mapping website. We used FindLatitudeAndLongitude.com
+LAT: 51 deg 30' 51.90" N 
+LNG: 0 deg 5' 38.73" W
+The location is on Milk Street in the city of London.
+
+Step 6: Find what camera model the kidnapper used to answer the last question at the bottom of the task.
+If we refer to the top of the data extracted by our exiftool command, we can see that the camera used was a Canon EOS R6.
+
+
