@@ -1,0 +1,43 @@
+# Nmap 7.93 scan initiated Thu Jun 29 02:19:48 2023 as: nmap -sV -O -A -v -oN nmap-sV 10.10.83.227
+Nmap scan report for 10.10.83.227
+Host is up (0.17s latency).
+Not shown: 998 closed tcp ports (reset)
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   3072 0a7814042cdf25fb4ea21434800b8539 (RSA)
+|   256 8d5601ca55dee17c6404cee6f1a5c7ac (ECDSA)
+|_  256 1fc1be3f9ce78e243334a644af684c3c (ED25519)
+80/tcp open  http    Apache httpd 2.4.41 ((Ubuntu))
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-title: Did not follow redirect to http://olympus.thm
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.93%E=4%D=6/29%OT=22%CT=1%CU=41659%PV=Y%DS=4%DC=T%G=Y%TM=649D22A
+OS:5%P=x86_64-pc-linux-gnu)SEQ(SP=101%GCD=1%ISR=106%TI=Z%CI=Z%II=I%TS=A)OPS
+OS:(O1=M509ST11NW7%O2=M509ST11NW7%O3=M509NNT11NW7%O4=M509ST11NW7%O5=M509ST1
+OS:1NW7%O6=M509ST11)WIN(W1=F4B3%W2=F4B3%W3=F4B3%W4=F4B3%W5=F4B3%W6=F4B3)ECN
+OS:(R=Y%DF=Y%T=40%W=F507%O=M509NNSNW7%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=A
+OS:S%RD=0%Q=)T2(R=N)T3(R=N)T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R
+OS:=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F
+OS:=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%
+OS:T=40%IPL=164%UN=0%RIPL=G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD
+OS:=S)
+
+Uptime guess: 26.482 days (since Fri Jun  2 14:45:47 2023)
+Network Distance: 4 hops
+TCP Sequence Prediction: Difficulty=257 (Good luck!)
+IP ID Sequence Generation: All zeros
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE (using port 21/tcp)
+HOP RTT       ADDRESS
+1   36.76 ms  10.13.0.1
+2   ... 3
+4   166.73 ms 10.10.83.227
+
+Read data files from: /usr/bin/../share/nmap
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Jun 29 02:20:21 2023 -- 1 IP address (1 host up) scanned in 33.71 seconds

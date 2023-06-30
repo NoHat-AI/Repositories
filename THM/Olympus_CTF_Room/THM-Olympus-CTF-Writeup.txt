@@ -1,0 +1,10 @@
+This is a write up for the Olympus CTF room on TryHackMe.com
+
+Task: Find four Flags on the targat machine.
+
+Target IP: 10.10.83.227
+
+Step 1: Start the target machine by pressing the green "Start Machine" button. Give it five minutes to start up.
+After a few minutes you should see your target IP.Ours is 10.10.83.227
+
+
