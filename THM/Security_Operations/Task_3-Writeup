@@ -1,0 +1,19 @@
+This is a write up for Task 3 in the Operations Security room on TryHackMe.com
+
+Task: Find the flag by stoping an ongoing attack using firewall.
+
+Client Website IP Address: 203.0.110.1
+
+
+Process
+Step 1: Open our website by clicking the green "View Site" button in the top right corner of the task.
+We instantly get a pop up that our website is being attcked.
+
+Step 2: Block the attacker IP Address.
+We see the red malicous signal coming from IP address 198.51.100.34. The malicious traffic is going to 
+IP Adderss 203.0.110.1 (Client's website). 
+Create a new rule to stop network traffic from the attacker's IP to our client's IP on port 80.
+
+Step 3: Collect the flag.
+After a moment of the red malicious traffic being stopped, a pop-up window with the flag will display. 
+THM{ATTACK_BLOCKED}
